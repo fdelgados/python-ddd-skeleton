@@ -13,7 +13,7 @@ Once the dependencies specified above are installed, follow the steps below.
 
 Clone the project:
 ```
-$ git clone '' my-python-ddd-project
+$ git clone git@github.com:fdelgados/python-ddd-skeleton.git my-python-ddd-project
 ```
 
 Set up the project:
