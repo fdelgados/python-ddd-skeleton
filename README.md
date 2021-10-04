@@ -1,5 +1,5 @@
 # Python DDD Skeleton
-This is a simple skeleton to build DDD projects in Python. The project is build on top of Flask framework and writen in Python version 3.9
+This is a simple skeleton to build DDD projects in Python. The project is build on top of Flask framework and written in Python version 3.9
 
 ## Installation
 
