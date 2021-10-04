@@ -1,0 +1,90 @@
+version: "3"
+
+services:
+  database:
+    build:
+      context: ../services/mysql
+      dockerfile: Dockerfile
+    image: mysql-server:latest
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - example_net
+
+  application:
+    build:
+      context: ../..
+      dockerfile: docker/services/application/Dockerfile
+    depends_on:
+      - database
+      - rabbitmq
+      - redis
+      - mailhog
+      - mongo
+      - mongo-express
+    volumes:
+      - ../../src:/var/www/src
+      - ../../tests:/var/www/tests
+      - ../../config:/var/www/config
+      - ../../export:/export
+      - ../../log:/log
+      - ../../bin:/var/www/bin
+    environment:
+      - FLASK_APP=shared/infrastructure/flask/entrypoint/run.py
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+    networks:
+      - example_net
+
+  worker:
+    build:
+      context: ../..
+      dockerfile: docker/services/application/Dockerfile
+    command: /var/www/bin/run_workers.py
+    depends_on:
+      - rabbitmq
+      - redis
+      - mailhog
+      - mongo
+      - mongo-express
+    networks:
+      - example_net
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    restart: unless-stopped
+    networks:
+      - example_net
+
+  redis:
+    image: redis:alpine
+    command: [ "redis-server", "--appendonly", "yes" ]
+    networks:
+      - example_net
+
+  mailhog:
+    image: mailhog/mailhog
+    networks:
+      - example_net
+
+  mongo:
+    build:
+      context: ../services/mongodb
+      dockerfile: Dockerfile
+    image: mongo:5.0-focal
+    restart: always
+    networks:
+      - example_net
+
+  mongo-express:
+    image: mongo-express:0.32
+    restart: always
+    networks:
+      - example_net
+
+networks:
+  example_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1

@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  application:
+    environment:
+      - ENVIRONMENT=development
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+  worker:
+    environment:
+      - ENVIRONMENT=development

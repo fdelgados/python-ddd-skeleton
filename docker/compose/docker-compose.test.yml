@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  application:
+    environment:
+      - SITE=test
+      - ENVIRONMENT=test
+      - FLASK_ENV=test
+      - FLASK_DEBUG=1
+    ports:
+      - "5000:5000"
+  worker:
+    environment:
+      - ENVIRONMENT=test
+
+networks:
+  example_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.6.0.0/16
+          gateway: 10.6.0.1

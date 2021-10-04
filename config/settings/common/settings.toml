@@ -1,0 +1,51 @@
+[application]
+id = "fc050f989329b47f861e5760c713c820"
+root_dir = "/var/www"
+logs_dir = "/log"
+contexts_dir = "/var/www/src"
+configs_dir = "/var/www/config"
+store_domain_event_subscriber.id = "shared.application.event.store.store_domain_event_on_published"
+store_domain_event_subscriber.class_name = "shared.application.event.store.StoreDomainEventOnPublished"
+contexts.corpus.event_store.enabled = true
+contexts.corpus.event_store.id = "corpus.domain.event.event_store.event_store"
+
+[identity_access]
+token_issuer = "http://localhost"
+public_key_file = "/export/certs/identity_access.pem"
+
+[api]
+title = "Corpus Builder API"
+port = 5000
+prefix = "/corpus-builder/api/v{:d}"
+version_str = "v{:d}"
+version = 1
+doc_path = "/corpus-builder/api/doc"
+
+[mailhog]
+host = "example-mail"
+smtp_port = 1025
+http_port = 8025
+
+[redis]
+port = 6379
+databases.cache = 0
+databases.corpus_config = 1
+
+[rabbitmq]
+exchanges.publish = "build_pipeline"
+connection.host = "rabbitmq-server"
+connection.user = "guest"
+connection.password = "guest"
+connection.port = 5672
+connection.vhost = "/"
+
+[mongodb]
+connection.host = "mongodb-server"
+connection.port = 27017
+
+[flask]
+error_include_message = false
+flask_debug = false
+
+[duplicates]
+content_file = "/var/www/data/content/{}/{}.csv"

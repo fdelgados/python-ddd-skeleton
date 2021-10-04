@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  database:
+    ports:
+      - "33008:3306"
+    environment:
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_ROOT_PASSWORD=HyMn4q6UR6wa
+
+  rabbitmq:
+    ports:
+      - "5675:5672"
+      - "15675:15672"
+
+  redis:
+    ports:
+      - "6380:6379"
+
+  mailhog:
+    ports:
+      - "10290:1025"
+      - "8020:8025"
+
+  mongo:
+    ports:
+      - "27020:27017"
+  mongo-express:
+    ports:
+      - "8087:8081"

@@ -1,0 +1,10 @@
+[application]
+baseurl = "http://localhost"
+
+[identity_access]
+token_issuer = "http://localhost"
+public_key_file = "/export/certs/identity_access.pem"
+
+[flask]
+flask_env = "development"
+flask_debug = true

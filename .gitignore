@@ -1,0 +1,11 @@
+out
+.redis-data*
+.mysql-data*
+.mongodb-data*
+export
+log
+tests/.hypothesis
+src/.hypothesis
+.venv
+.pytest_cache
+resources/git

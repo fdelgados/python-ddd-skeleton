@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<services>
+    <service id="shared.domain.service.logging.logger.logger"
+             alias="shared.infrastructure.logging.file.logger.file_logger"/>
+
+    <service id="shared.domain.service.caching.cache.cache"
+             alias="shared.infrastructure.caching.redis.cache.redis_cache"/>
+
+    <service id="shared.domain.bus.query.query_bus"
+             alias="shared.infrastructure.bus.query.query_bus_impl" />
+
+    <service id="shared.domain.bus.command.command_bus"
+             alias="shared.infrastructure.bus.command.command_bus_impl" />
+
+    <service id="shared.domain.bus.event.event_bus"
+             alias="shared.infrastructure.bus.event.inmemory.in_memory_event_bus" />
+
+    <service id="shared.domain.service.messaging.publisher.event_publisher"
+             alias="shared.infrastructure.bus.event.rabbitmq.rabbitmq_event_bus" />
+</services>

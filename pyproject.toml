@@ -1,0 +1,23 @@
+[tool-black]
+line-length = 88
+target-version = ['py39']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.idea
+  | \.mysql\-data*
+  | \.mypy_cache
+  | \.venv
+  | config
+  | docker
+  | export
+  | log
+  | out
+  | redis\-data
+  | resources
+  | tests\/\.hypothesis
+  | src\/\.hypothesis
+)/
+'''

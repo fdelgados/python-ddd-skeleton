@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<services>
+    <service id="shared.infrastructure.logging.file.logger.file_logger"
+             class="shared.infrastructure.logging.file.logger.FileLogger" />
+
+    <service id="shared.infrastructure.caching.redis.cache.redis_cache"
+             class="shared.infrastructure.caching.redis.cache.RedisCache" />
+
+    <service id="shared.infrastructure.messaging.rabbitmq.connector.rabbitmq_connector"
+             class="shared.infrastructure.messaging.rabbitmq.connector.RabbitMqConnector">
+        <argument name="logger" value="shared.domain.service.logging.logger.logger" type="service" />
+    </service>
+
+    <service id="shared.infrastructure.bus.event.rabbitmq.rabbitmq_event_bus"
+             class="shared.infrastructure.bus.event.rabbitmq.RabbitMqEventBus">
+        <argument name="connector" value="shared.infrastructure.messaging.rabbitmq.connector.rabbitmq_connector" type="service" />
+        <argument name="exchange_name" value="nlp" type="parameter" />
+        <argument name="logger" value="shared.domain.service.logging.logger.logger" type="service" />
+    </service>
+
+    <service id="shared.infrastructure.bus.query.query_bus_impl"
+             class="shared.infrastructure.bus.query.QueryBusImpl" />
+
+    <service id="shared.infrastructure.bus.command.command_bus_impl"
+             class="shared.infrastructure.bus.command.CommandBusImpl" />
+
+    <service id="shared.infrastructure.bus.event.inmemory.in_memory_event_bus"
+             class="shared.infrastructure.bus.event.in_memory.InMemoryEventBus" />
+
+</services>
